@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { MonitorPlay, Maximize2, Loader2 } from 'lucide-react';
+import Image from 'next/image';
 
 export default function PlayerPage() {
   const [pairingCode, setPairingCode] = useState('');
@@ -86,9 +87,15 @@ export default function PlayerPage() {
     <div className="min-h-screen bg-black overflow-hidden flex items-center justify-center">
       {/* Player Rendering Area */}
       {currentMedia ? (
-        <div className="w-full h-full">
+        <div className="w-full h-full relative">
           {/* Example media rendering (image/video/widget) */}
-          <img src={currentMedia} alt="Currently playing" className="w-full h-full object-cover" />
+          <Image
+            src={currentMedia}
+            alt="Currently playing"
+            fill
+            className="object-cover"
+            unoptimized // Since this is dynamic user content from unknown sources in the placeholder
+          />
         </div>
       ) : (
         <div className="text-white text-2xl font-light">
